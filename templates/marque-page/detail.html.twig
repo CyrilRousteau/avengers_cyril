@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+{% endblock %}
+
+
+{% block title %}Détail de l url des Marque-Pages{% endblock %}
+
+{% block body %}
+<h1>Détail de l url des Marque-Pages</h1>
+
+<p>url de marque page : {{marquePage.url}}</p>
+{% endblock %}
