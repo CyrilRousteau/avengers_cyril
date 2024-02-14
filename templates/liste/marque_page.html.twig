@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+{% endblock %}
+
+
+{% block title %}Liste des Marque-Pages{% endblock %}
+
+{% block body %}
+<h1>Liste complète des marque-pages</h1>
+
+<table class="table-custom">
+    <thead>
+        <tr>
+            <th>URL</th>
+            <th>Commentaire</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for marquePage in marquePages %}
+        <tr>
+            <td>{{ marquePage.url }}</td>
+            <td>{{ marquePage.commentaire }}</td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="2">Aucun marque-page trouvé.</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
