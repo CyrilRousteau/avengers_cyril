@@ -22,7 +22,7 @@ class MarquePageController extends AbstractController
      }
 
 
-     #[Route("/{id<\d+>}", name: "marque-page")]
+     #[Route("/{id<\d+>}", name: "detail")]
      public function afficherDetailMarquePage(int $id, EntityManagerInterface $entityManager): Response
      {
          $marquePage = $entityManager->getRepository(MarquePage::class)->find($id);
@@ -39,7 +39,7 @@ class MarquePageController extends AbstractController
      }
 
 
-    #[Route("/liste/marque-page/ajouter", name: "marque-page_ajouter")]
+    #[Route("/ajouter", name: "marque-page_ajouter")]
     public function ajouterMarquePage(EntityManagerInterface $entityManager): Response
     {
         
@@ -50,8 +50,14 @@ class MarquePageController extends AbstractController
 
         $entityManager->persist($marquePage);
         $entityManager->flush();
+        $LienVersDetailMarquePage = $this->generateUrl('marque-page_detail', [
+            'id' => $marquePage->getId(),
+            ]);
+    return $this->render('marque-page/ajout.html.twig', [
+        'marquePage' => $marquePage,
+        'LienVersDetailMarquePage' => $LienVersDetailMarquePage,
+    ]);
 
-    return new Response("Marque-page sauvegardé avec l'id ". $marquePage->getId());
     }
 }
     

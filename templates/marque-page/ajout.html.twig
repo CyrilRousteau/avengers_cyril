@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+{% endblock %}
+
+{% block title %}Ajout d'un Marque-Page{% endblock %}
+
+{% block body %}
+<h1>Ajout d'un Marque-Page</h1>
+
+<p>Marque-page sauvegardé avec l'id : {{ marquePage.id }}</p>
+
+<a href="{{ LienVersDetailMarquePage }}">Retour au détail du marque page : {{ marquePage.id }}</a>
+
+{% endblock %}
