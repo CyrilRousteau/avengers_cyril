@@ -5,11 +5,33 @@
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 {% endblock %}
 
-
-{% block title %}Détail de l url des Marque-Pages{% endblock %}
+{% block title %}Détail d'un Marque-Page{% endblock %}
 
 {% block body %}
-<h1>Détail de l url des Marque-Pages</h1>
+<h1>Détail d'un Marque-Page</h1>
 
-<p>url de marque page : {{marquePage.url}}</p>
+<table class="table-custom">
+    <tr>
+        <th>Libellé</th>
+        <th>Valeur</th>
+    </tr>
+    <tr>
+        <td>Id</td>
+        <td>{{ marquePage.id }}</td>
+    </tr>
+    <tr>
+        <td>Url</td>
+        <td>{{ marquePage.url }}</td>
+    </tr>
+    <tr>
+        <td>Date de création</td>
+        <td>{{ marquePage.dateCreation ? marquePage.dateCreation|date('d/m/Y H:i:s') : '' }}</td>
+    </tr>
+    <tr>
+        <td>Commentaire</td>
+        <td>{{ marquePage.commentaire }}</td>
+    </tr>
+</table>
+
+<a href="{{ lienVersPageDaccueilDesmarquesPages }}">Retour à l'accueil des marques-pages</a>
 {% endblock %}

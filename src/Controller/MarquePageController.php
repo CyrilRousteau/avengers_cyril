@@ -31,13 +31,15 @@ class MarquePageController extends AbstractController
                  "Aucun marque-page avec l'id ".$id
              );
          }
+         $lienVersPageDaccueilDesmarquesPages = $this->generateUrl('marque-page_index');
          return $this->render('marque-page/detail.html.twig', [
              'marquePage' => $marquePage,
+             'lienVersPageDaccueilDesmarquesPages' => $lienVersPageDaccueilDesmarquesPages,
          ]);
      }
 
 
-    #[Route("/ajouter", name: "marque-page_ajouter")]
+    #[Route("/liste/marque-page/ajouter", name: "marque-page_ajouter")]
     public function ajouterMarquePage(EntityManagerInterface $entityManager): Response
     {
         

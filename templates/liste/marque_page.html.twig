@@ -14,21 +14,26 @@
 <table class="table-custom">
     <thead>
         <tr>
+            <th>ID</th>
             <th>URL</th>
             <th>Commentaire</th>
+            <th>Date de création</th>
         </tr>
     </thead>
     <tbody>
     {% for marquePage in marquePages %}
         <tr>
+            <td>{{ marquePage.id }}</td>
             <td>{{ marquePage.url }}</td>
             <td>{{ marquePage.commentaire }}</td>
+            <td>{{ marquePage.dateCreation ? marquePage.dateCreation|date('Y-m-d') : '' }}</td>
         </tr>
     {% else %}
         <tr>
-            <td colspan="2">Aucun marque-page trouvé.</td>
+            <td colspan="4">Aucun marque-page trouvé.</td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
+
 {% endblock %}
