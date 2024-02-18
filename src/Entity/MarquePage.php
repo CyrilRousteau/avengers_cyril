@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MarquePageRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,6 +24,14 @@ class MarquePage
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date_creation = null;
+
+    #[ORM\ManyToMany(targetEntity: MotsCles::class, mappedBy: 'marque_page')]
+    private Collection $motsCles;
+
+    public function __construct()
+    {
+        $this->motsCles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -60,6 +70,33 @@ class MarquePage
     public function setDateCreation(?\DateTimeInterface $date_creation): static
     {
         $this->date_creation = $date_creation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MotsCles>
+     */
+    public function getMotsCles(): Collection
+    {
+        return $this->motsCles;
+    }
+
+    public function addMotsCle(MotsCles $motsCle): static
+    {
+        if (!$this->motsCles->contains($motsCle)) {
+            $this->motsCles->add($motsCle);
+            $motsCle->addMarquePage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMotsCle(MotsCles $motsCle): static
+    {
+        if ($this->motsCles->removeElement($motsCle)) {
+            $motsCle->removeMarquePage($this);
+        }
 
         return $this;
     }
