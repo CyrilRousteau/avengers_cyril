@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Faune{% endblock %}
+ {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/cailloux.css') }}">
+ {% endblock %}
+
+{% block body %}
+    <h1>Faune</h1>
+    <ul>
+        {% for faune in faunes %}
+            <li>
+                Nom : {{ faune.nom }} - Description :  {{ faune.description }}
+                <img src="{{ asset(faune.image) }}" alt="Image de faune">
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ path('marquepage_index') }}">Retour à la liste</a>
+{% endblock %}
