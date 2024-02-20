@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h2>Liste des Livres</h2>
+<ul>
+    {% for livre in livres %}
+    <li>
+        <a href="{{ path('livre_detail', {'id': livre.id}) }}">{{ livre.titre }}</a>
+        - {{ livre.auteur.nom }} {{ livre.auteur.prenom }}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
