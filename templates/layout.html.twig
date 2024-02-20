@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('assets/css/header.css') }}">
+    {% endblock %}
+ {% block header %}
+    <header class="header-container">
+        <h1>Symfony dans tous ses états !</h1>
+        <img src="{{ asset('assets/images/logo.png') }}" alt="Logo">
+    </header>
+    {% block main %}
+    {% endblock %}
+ {% endblock %}
