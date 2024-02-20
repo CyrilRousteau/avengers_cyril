@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du Marque-Page{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1>Détails du Marque-Page</h1>
+
+        <table class="table-custom">
+            <thead>
+            <tr>
+                <th scope="col">Libelle</th>
+                <th scope="col">Valeur</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row"> id </th>
+                <td>{{ marquePage.id }}</td>
+            </tr>
+            <tr>
+                <th scope="row"> url </th>
+                <td>{{ marquePage.url }}</td>
+            </tr>
+            <tr>
+                <th scope="row"> commentaire </th>
+                <td>{{ marquePage.commentaire }}</td>
+            </tr>
+            <tr>
+                <th scope="row"> dateCreation </th>
+                <td>{{ marquePage.dateCreation|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th scope="row"> motsCles </th>
+
+                <td>
+                 {% for mc in marquePage.getMotsCles %} 
+                    <div>
+                        {{ mc.getMotCle }}
+                    </div>
+                 {% endfor %}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <a href="{{ path('marquepage_index') }}">Retour à la liste</a>
+{% endblock %}

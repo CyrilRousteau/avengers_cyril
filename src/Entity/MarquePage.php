@@ -16,16 +16,16 @@ class MarquePage
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $url = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $commentaire = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_creation = null;
 
-    #[ORM\ManyToMany(targetEntity: MotsCles::class, mappedBy: 'marque_page')]
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $commentaire = null;
+
+    #[ORM\ManyToMany(targetEntity: MotsCles::class, inversedBy: 'marquePages')]
     private Collection $motsCles;
 
     public function __construct()
@@ -43,21 +43,9 @@ class MarquePage
         return $this->url;
     }
 
-    public function setUrl(?string $url): static
+    public function setUrl(string $url): static
     {
         $this->url = $url;
-
-        return $this;
-    }
-
-    public function getCommentaire(): ?string
-    {
-        return $this->commentaire;
-    }
-
-    public function setCommentaire(string $commentaire): static
-    {
-        $this->commentaire = $commentaire;
 
         return $this;
     }
@@ -67,9 +55,21 @@ class MarquePage
         return $this->date_creation;
     }
 
-    public function setDateCreation(?\DateTimeInterface $date_creation): static
+    public function setDateCreation(\DateTimeInterface $date_creation): static
     {
         $this->date_creation = $date_creation;
+
+        return $this;
+    }
+
+    public function getCommentaire(): ?string
+    {
+        return $this->commentaire;
+    }
+
+    public function setCommentaire(?string $commentaire): static
+    {
+        $this->commentaire = $commentaire;
 
         return $this;
     }
@@ -86,7 +86,6 @@ class MarquePage
     {
         if (!$this->motsCles->contains($motsCle)) {
             $this->motsCles->add($motsCle);
-            $motsCle->addMarquePage($this);
         }
 
         return $this;
@@ -94,10 +93,9 @@ class MarquePage
 
     public function removeMotsCle(MotsCles $motsCle): static
     {
-        if ($this->motsCles->removeElement($motsCle)) {
-            $motsCle->removeMarquePage($this);
-        }
+        $this->motsCles->removeElement($motsCle);
 
         return $this;
     }
+
 }

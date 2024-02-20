@@ -15,15 +15,15 @@ class MotsCles
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToMany(targetEntity: MarquePage::class, inversedBy: 'motsCles')]
-    private Collection $marque_page;
+    #[ORM\Column(length: 255)]
+    private ?string $motCle = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $nom = null;
+    #[ORM\ManyToMany(targetEntity: MarquePage::class, mappedBy: 'motsCles')]
+    private Collection $marquePages;
 
     public function __construct()
     {
-        $this->marque_page = new ArrayCollection();
+        $this->marquePages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -31,18 +31,31 @@ class MotsCles
         return $this->id;
     }
 
+    public function getMotCle(): ?string
+    {
+        return $this->motCle;
+    }
+
+    public function setMotCle(string $motCle): static
+    {
+        $this->motCle = $motCle;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, MarquePage>
      */
-    public function getMarquePage(): Collection
+    public function getMarquePages(): Collection
     {
-        return $this->marque_page;
+        return $this->marquePages;
     }
 
     public function addMarquePage(MarquePage $marquePage): static
     {
-        if (!$this->marque_page->contains($marquePage)) {
-            $this->marque_page->add($marquePage);
+        if (!$this->marquePages->contains($marquePage)) {
+            $this->marquePages->add($marquePage);
+            $marquePage->addMotsCle($this);
         }
 
         return $this;
@@ -50,19 +63,9 @@ class MotsCles
 
     public function removeMarquePage(MarquePage $marquePage): static
     {
-        $this->marque_page->removeElement($marquePage);
-
-        return $this;
-    }
-
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom(?string $nom): static
-    {
-        $this->nom = $nom;
+        if ($this->marquePages->removeElement($marquePage)) {
+            $marquePage->removeMotsCle($this);
+        }
 
         return $this;
     }
