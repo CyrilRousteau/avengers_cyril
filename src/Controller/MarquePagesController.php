@@ -23,17 +23,6 @@ class MarquePagesController extends AbstractController
         ]);
     }
 
-    #[Route('/ajouter', name: "ajouter")]
-    public function ajoutMarquePage(EntityManagerInterface $entityManager){ // pas bon exemple
-        $marque_page = new MarquePage();
-        $marque_page->setUrl("https://captainamerica.nc/");
-        $marque_page->setDateCreation(new \DateTime());
-        $marque_page->setCommentaire("Archive XII");
-        $entityManager->persist($marque_page);
-        $entityManager->flush();
-        return new Response("Marque page ajouté avec succès (id :".$marque_page->getId().")");
-    }
-
     #[Route('/details/{id}', name:'details')]
     public function detail(EntityManagerInterface $entityManager, int $id): Response {
         $marquePage = $entityManager->getRepository(MarquePage::class)->find($id);
