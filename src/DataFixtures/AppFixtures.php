@@ -30,6 +30,19 @@ class AppFixtures extends Fixture
             "Le prince de la brume",
             "Le palais des minuit",
             "Le livre des choses perdues",
+            "Le palais de la nuit",
+            "Le palais des ténèbres",
+            "Le palais des miroirs",
+            "Le palais des souvenirs",
+            "Le palais des illusions",
+            "Le palais des rêves",
+            "Le palais des mensonges",
+            "Le palais des murmures",
+            "Le palais des ombres",
+            "Le palais des secrets",
+            "Le palais des regrets",
+            "Le palais des promesses",
+            "Le palais des passions",
         ];
 
         // Liste prédéfinie de prenoms d'auteurs
@@ -49,6 +62,19 @@ class AppFixtures extends Fixture
             "Marcelle",
             "Gérard",
             "Gérardine",
+            "Gérardus",
+            "Gérardina",
+            "Gérardino",
+            "Gérardine",
+            "Gérardus",
+            "Gérardina",
+            "Francois",
+            "Cyril",
+            "Cyrille",
+            "Cyrilus",
+            "Cyrilina",
+            "Cyrilino",
+            "Cyriline",
         ];
         // Liste prédéfinie de noms d'auteurs
         $nomAuteur = [
@@ -66,7 +92,20 @@ class AppFixtures extends Fixture
             "Bonnet",
             "Chevalier",
             "Lemaire",
-            "Perrin",  
+            "Perrin",
+            "Guerin",
+            "Robin",
+            "Clement",
+            "Morin",
+            "Nicolas",
+            "Henry",
+            "Roussel",
+            "Mathieu",
+            "Gautier",
+            "Masson",
+            "Marchand",
+            "Duval",
+            "Denis",
         ];
         // Liste prédéfinie de mots cles
         $listeMotsCles = [
@@ -99,36 +138,36 @@ class AppFixtures extends Fixture
 
         // Liste prédéfinie d'url de marques pages x28
         $urlMarquesPages = [
-            "www.google.com",
-            "www.facebook.com",
-            "www.twitter.com",
-            "www.linkedin.com",
-            "www.github.com",
-            "www.stackoverflow.com",
-            "www.youtube.com",
-            "www.wikipedia.org",
-            "www.amazon.com",
-            "www.ebay.com",
-            "www.leboncoin.fr",
-            "www.liberation.fr",
-            "www.lemonde.fr",
-            "www.laposte.fr",
-            "www.labanquepostale.fr",
-            "www.lcl.fr",
-            "www.creditmutuel.fr",
-            "www.banquepopulaire.fr",
-            "www.caisse-epargne.fr",
-            "www.societegenerale.fr",
-            "www.boursorama.com",
-            "www.ing.fr",
-            "www.hellobank.fr",
-            "www.orange.fr",
-            "www.sfr.fr",
-            "www.bouyguestelecom.fr",
-            "www.free.fr",
-            "www.ubuntu.com",
+            "www.google1.com",
+            "www.facebook1.com",
+            "www.twitter1.com",
+            "www.linkedin1.com",
+            "www.github1.com",
+            "www.stackoverflow1.com",
+            "www.youtube1.com",
+            "www.wikipedia1.org",
+            "www.amazon1.com",
+            "www.ebay1.com",
+            "www.leboncoin1.fr",
+            "www.liberation1.fr",
+            "www.lemonde1.fr",
+            "www.laposte1.fr",
+            "www.labanquepostale1.fr",
+            "www.lcl1.fr",
+            "www.creditmutuel1.fr",
+            "www.banquepopulaire1.fr",
+            "www.caisse-epargne1.fr",
+            "www.societegenerale1.fr",
+            "www.boursorama1.com",
+            "www.ing1.fr",
+            "www.hellobank1.fr",
+            "www.orange1.fr",
+            "www.sfr1.fr",
+            "www.bouyguestelecom1.fr",
+            "www.free1.fr",
+            "www.ubuntu1.com",
         ];
-         // Liste prédéfinie d'url de marques pages x28
+         // Liste prédéfinie de commentaires de marques pages x28
          $commentairesMarquesPages = [
             "Chapitre IV",
             "Epilogue",
@@ -162,7 +201,7 @@ class AppFixtures extends Fixture
 
 
         // Création de 15 auteurs
-        for ($j = 0; $j < 15; $j++) {
+        for ($j = 0; $j < 28; $j++) {
             $auteur = new Auteur();
             $nomAleatoire = $nomAuteur[$j];
             $prenomAleatoire = $prenomAuteur[$j];
@@ -208,7 +247,7 @@ class AppFixtures extends Fixture
             $nombreMotsCles = mt_rand(2, 5);
             $motsClesAleatoires = array_rand($motsCles, $nombreMotsCles);
             if (!is_array($motsClesAleatoires)) {
-                $motsClesAleatoires = [$motsClesAleatoires]; // Assurez-vous que c'est un tableau
+                $motsClesAleatoires = [$motsClesAleatoires];
             }
             foreach ($motsClesAleatoires as $index) {
                 $marquePage->addMotsCle($motsCles[$index]);
