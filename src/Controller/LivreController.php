@@ -12,28 +12,6 @@ use App\Entity\Auteur;
 class LivreController extends AbstractController
 {
 
-    #[Route("/ajouter-livre", name:"ajouter_livre")]
-    
-   public function ajouterLivre(EntityManagerInterface $entityManager): Response
-   {
-       // Création d'un nouvel auteur
-       $auteur = new Auteur();
-       $auteur->setNom("Nothomb");
-       $auteur->setPrenom("Amélie");
-
-       // Création d'un nouveau livre
-       $livre = new Livre();
-       $livre->setTitre("Hulk se marie");
-       $livre->setDatePublication(new \DateTime());
-       // Associer l'auteur au livre
-       $livre->setAuteur($auteur);
-       $entityManager->persist($auteur);
-       $entityManager->persist($livre);
-       $entityManager->flush();
-
-       // Retourner une réponse
-       return new Response("Livre et auteur ajoutés avec succès (Livre ID : ".$livre->getId().", Auteur ID : ".$auteur->getId().")");
-   }
     // Afficher tous les livres
     #[Route('/livre', name: 'liste_livre')]
     public function index(EntityManagerInterface $entityManager): Response
