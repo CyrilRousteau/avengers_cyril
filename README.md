@@ -40,3 +40,6 @@ symfony server:start
 ## Chargement des données de test avec DataFixtures
 
 php bin/console doctrine:fixtures:load
+
+## récupérer toutes les routes d'un projet 
+php bin/console debug:router

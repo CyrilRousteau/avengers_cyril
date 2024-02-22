@@ -2,8 +2,6 @@
 
 {% block header %}
 <h2>Liste des Livres</h2>
-<h1>Nombre Total de Livres</h1>
-<p>Il y a actuellement <strong>{{ nombreLivres }}</strong> livres disponibles.</p>
 <ul>
     {% for livre in livres %}
     <li>

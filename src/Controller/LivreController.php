@@ -19,21 +19,24 @@ class LivreController extends AbstractController
     {
         // Création d'un nouvel auteur
         $auteur = new Auteur();
-        $auteur->setNom("Nothomb");
-        $auteur->setPrenom("Amélie");
+        $auteur->setNom("Gérardina");
+        $auteur->setPrenom("Robin");
  
         // Création d'un nouveau livre
         $livre = new Livre();
-        $livre->setTitre("Hulk se marie");
+        $livre->setTitre("J'ai écris un second livre");
         $livre->setDatePublication(new \DateTime());
         // Associer l'auteur au livre
         $livre->setAuteur($auteur);
         $entityManager->persist($auteur);
         $entityManager->persist($livre);
         $entityManager->flush();
- 
-        // Retourner une réponse
-        return new Response("Livre et auteur ajoutés avec succès (Livre ID : ".$livre->getId().", Auteur ID : ".$auteur->getId().")");
+        $urlLivre = $this->generateUrl('liste_livre');
+        $htmlResponse = "Livre et auteur ajoutés avec succès (Livre ID : " . $livre->getId() . ", Auteur ID : " . $auteur->getId() . ")";
+        $htmlResponse .= "<br><a href='" . $urlLivre . "'>Retour à la liste des livres</a>";
+
+        // Retourner la réponse HTML
+        return new Response($htmlResponse);
     }
 
     // Afficher tous les livres
@@ -47,7 +50,17 @@ class LivreController extends AbstractController
             'livres' => $livres,
             'nombreLivres' => $nombreLivres,
         ]);
-    }    
+    }  
+    
+    #[Route('/nombre-livres', name: 'nombre_livres')]
+    public function nombreLivres(LivreRepository $livreRepository): Response
+    {
+        $nombreLivres = $livreRepository->countTotalLivres();
+        
+        return $this->render('livre/nombre.html.twig', [
+            'nombreLivres' => $nombreLivres,
+        ]);
+    }
 
   // Afficher un livre via son id
     #[Route('/livres/{id}', name:'livre_detail')]
@@ -55,15 +68,6 @@ class LivreController extends AbstractController
     {
         return $this->render('livre/detail.html.twig', [
             'livre' => $livre,
-        ]);
-    }
-    // Afficher nombre de livres total
-    #[Route("/livres/nombreDeLivres", name: "livres_nombre")]
-    public function nombreDeLivres(LivreRepository $livreRepository): Response
-    {
-        $nombreLivres = $livreRepository->countTotalLivres();
-        return $this->render('livre/index.html.twig', [
-            'nombreLivres' => $nombreLivres,
         ]);
     }
 
