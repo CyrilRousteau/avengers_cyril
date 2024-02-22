@@ -21,28 +21,22 @@ class AuteurRepository extends ServiceEntityRepository
         parent::__construct($registry, Auteur::class);
     }
 
-//    /**
-//     * @return Auteur[] Returns an array of Auteur objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findAuteursAvecNombreLivresSupérieur(int $nombreLivresMin): array
+    {
+        $entityManager = $this->getEntityManager();
 
-//    public function findOneBySomeField($value): ?Auteur
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $dql = "
+            SELECT a, COUNT(l.id) AS HIDDEN nbrLivres
+            FROM App\Entity\Auteur a
+            JOIN a.livres l
+            GROUP BY a.id
+            HAVING nbrLivres > :nombreLivresMin
+        ";
+
+        $query = $entityManager->createQuery($dql)
+                    ->setParameter('nombreLivresMin', $nombreLivresMin);
+
+        return $query->getResult();
+    }
+
 }

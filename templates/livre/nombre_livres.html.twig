@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nombre de Livres{% endblock %}
+
+{% block header %}
+<h1>Nombre Total de Livres</h1>
+<p>Il y a actuellement <strong>{{ nombreLivres }}</strong> livres disponibles.</p>
+
+<a href="{{ path('marquepage_index') }}">Retour à la liste</a>
+{% endblock %}
