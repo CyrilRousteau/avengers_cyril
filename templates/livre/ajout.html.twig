@@ -4,5 +4,5 @@
 {% block header %}
     <h2>Formulaire d'ajout d'un livre</h2>
     {{ form(mon_formulaire_ajout_livre) }}
-    <a href="{{ path('marquepage_index') }}">Retour à la liste</a>
+    <button><a href="{{ path('liste_livre') }}">Retour à la liste des livres</a></button>
 {% endblock %}

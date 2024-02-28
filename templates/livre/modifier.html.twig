@@ -4,5 +4,5 @@
 {% block header %}
     <h2>Formulaire de modification d'un Livre</h2>
     {{ form(mon_formulaire_modification_livre) }}
-    <a href="{{ path('marquepage_index') }}">Retour à la liste</a>
+    <button><a href="{{ path('liste_livre') }}">Retour à la liste des livres</a></button>
 {% endblock %}

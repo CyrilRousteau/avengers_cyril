@@ -4,5 +4,5 @@
 <h2>{{ livre.titre }}</h2>
 <p>Livre publié le : {{ livre.datePublication | date('Y-m-d') }}</p>
 <p>Écrit par : {{ livre.auteur.nom }} {{ livre.auteur.prenom }}</p>
-<a href="{{ path('liste_livre') }}">Retour à la liste des livres</a>
+<button><a href="{{ path('liste_livre') }}">Retour à la liste des livres</a></button>
 {% endblock %}
