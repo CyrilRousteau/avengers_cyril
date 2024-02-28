@@ -5,10 +5,26 @@ namespace App\Entity;
 use App\Repository\LivreRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: LivreRepository::class)]
 class Livre
 {
+    #[Assert\NotBlank]
+    #[Assert\Type("\DateTime")]
+    #[Assert\Choice(
+        choices : [ "fiction", "non-fiction" ],
+        message : "Ecrivez un titre."
+        )]
+    #[Assert\Length(min: 3)]
+    #[Assert\NegativeOrZero]
+    #[Assert\Range(
+        min : 3,
+        max : 180,
+        notInRangeMessage: "La valeur doit être entre {{ min }} et {{ max }}.",
+    )]
+    private $Livre;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

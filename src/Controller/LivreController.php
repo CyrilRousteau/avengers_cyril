@@ -6,9 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface; 
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Livre; 
 use App\Entity\Auteur;
 use App\Repository\LivreRepository;
+use App\Form\Type\ModificationLivreType;
 
 class LivreController extends AbstractController
 {
@@ -80,5 +83,36 @@ class LivreController extends AbstractController
             'livres' => $livres,
         ]);
     }
+
+    #[Route('/livre/modifier/{id}', name: 'modifier_livre')]
+    public function modifierLivre(Request $request, $id, ManagerRegistry $doctrine): Response {
+        // Récupérez le livre à partir de la base de données
+        $entityManager = $doctrine->getManager();
+        $livre = $entityManager->getRepository(Livre::class)->find($id);
+
+        if (!$livre) {
+            throw $this->createNotFoundException('Aucun livre trouvé pour l\'id ' . $id);
+        }
+
+        // Création et traitement du formulaire de modification 
+        $form = $this->createForm(ModificationLivreType::class, $livre);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $entityManager->flush();
+
+            // Redirige vers une route appropriée après la modification
+            return $this->redirectToRoute('modification_livre_success');
+        }
+
+        return $this->render('livre/modifier.html.twig', [
+            'mon_formulaire_modification_livre' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/livre/modification_success', name: 'modification_livre_success')]
+        public function modificationSuccess() {
+            return $this->render('livre/ajout_success_modification_livre.html.twig');
+        }
 
 }
