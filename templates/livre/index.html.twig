@@ -1,19 +1,35 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/livres.css') }}">
+{% endblock %}
+
 {% block header %}
 <h2>Liste des Livres</h2>
-<ul>
-    {% for livre in livres %}
-    <li>
-        <a href="{{ path('livre_detail', {'id': livre.id}) }}">{{ livre.titre }}</a>
-        - {% if livre.auteur %}
-            {{ livre.auteur.nom }} {{ livre.auteur.prenom }}
-          {% else %}
-            Auteur Inconnu
-          {% endif %}
-    </li>
-    {% endfor %}
-</ul>
+<table class="tableau-livres">
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Auteur</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for livre in livres %}
+        <tr>
+            <td><a href="{{ path('livre_detail', {'id': livre.id}) }}">{{ livre.titre }}</a></td>
+            <td>
+                {% if livre.auteur %}
+                    {{ livre.auteur.nom }} {{ livre.auteur.prenom }}
+                {% else %}
+                    Auteur Inconnu
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 <button><a href="{{ path('marquepage_index') }}">Retour à la liste des marques pages</a></button>
 <button><a href="{{ path('livre_ajout') }}">Ajouter un livre</a></button>
+<button><a href="{{ path('auteur_ajout') }}">Ajouter un auteur</a></button>
 {% endblock %}

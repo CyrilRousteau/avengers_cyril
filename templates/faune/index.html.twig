@@ -1,19 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Faune{% endblock %}
- {% block stylesheets %}
+{% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('assets/css/cailloux.css') }}">
- {% endblock %}
+{% endblock %}
 
 {% block header %}
-    <h1>Faune</h1>
-    <ul>
-        {% for faune in faunes %}
-            <li>
-                Nom : {{ faune.nom }} - Description :  {{ faune.description }}
-                <img src="{{ asset(faune.image) }}" alt="Image de faune">
-            </li>
-        {% endfor %}
-    </ul>
-    <button><a href="{{ path('liste_livre') }}">Retour à la liste des livres</a></button>
+    <div class="container mt-5">
+        <h1>Faune</h1>
+        <div class="cailloux-container">
+            {% for faune in faunes %}
+                <div class="cailloux-card">
+                    <h2>{{ faune.nom }}</h2>
+                    <img src="{{ asset(faune.image) }}" alt="Image de {{ faune.nom }}">
+                    <p>{{ faune.description }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <button><a href="{{ path('liste_livre') }}">Retour à la liste des livres</a></button>
+    </div>
 {% endblock %}

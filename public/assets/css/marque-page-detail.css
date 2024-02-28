@@ -1,0 +1,36 @@
+.container {
+    max-width: 800px;
+    margin: 5rem auto;
+    padding: 0 1rem;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.table-custom {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.table-custom th,
+.table-custom td {
+    padding: .65rem;
+    border: 1px solid #dee2e6;
+    text-align: left;
+}
+
+.table-custom th {
+    background-color: #009879;
+    color: white;
+}
+
+.table-custom td {
+    background-color: #fff;
+}
+
+.table-custom tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}

@@ -3,17 +3,20 @@
 {% block title %}Flore{% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('assets/css/cailloux.css') }}">
- {% endblock %}
+{% endblock %}
 
 {% block header %}
-    <h1>Flore</h1>
-    <ul>
-        {% for flore in flores %}
-            <li>
-                {{ flore.nom }} - {{ flore.description }}
-                <img src="{{ asset(flore.image) }}" alt="Image de fleur">
-            </li>
-        {% endfor %}
-    </ul>
-    <button><a href="{{ path('liste_livre') }}">Retour à la liste des livres</a></button>
+    <div class="container mt-5">
+        <h1>Flore</h1>
+        <div class="cailloux-container">
+            {% for flore in flores %}
+                <div class="cailloux-card">
+                    <h2>{{ flore.nom }}</h2>
+                    <img src="{{ asset(flore.image) }}" alt="Image de {{ flore.nom }}">
+                    <p>{{ flore.description }}</p>
+                </div>
+            {% endfor %}
+        </div>
+         <button><a href="{{ path('liste_livre') }}">Retour à la liste des livres</a></button>
+    </div>
 {% endblock %}

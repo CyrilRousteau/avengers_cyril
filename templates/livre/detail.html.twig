@@ -1,8 +1,26 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/livres.css') }}">
+{% endblock %}
+
 {% block header %}
-<h2>{{ livre.titre }}</h2>
-<p>Livre publié le : {{ livre.datePublication | date('Y-m-d') }}</p>
-<p>Écrit par : {{ livre.auteur.nom }} {{ livre.auteur.prenom }}</p>
+<table class="tableau-livres">
+    <tbody>
+        <tr>
+            <th>Titre</th>
+            <td>{{ livre.titre }}</td>
+        </tr>
+        <tr>
+            <th>Date de Publication</th>
+            <td>{{ livre.datePublication | date('Y-m-d') }}</td>
+        </tr>
+        <tr>
+            <th>Auteur</th>
+            <td>{{ livre.auteur.nom }} {{ livre.auteur.prenom }}</td>
+        </tr>
+    </tbody>
+</table>
 <button><a href="{{ path('liste_livre') }}">Retour à la liste des livres</a></button>
 {% endblock %}
