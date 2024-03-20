@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/form.css') }}">
+{% endblock %}
+
+{% block title %}Ajouter un Marque-Page{% endblock %}
+
+{% block header %}
+    <h2>Ajouter un Marque-Page</h2>
+    {{ form_start(mon_formulaire_ajout_marque_page) }}
+        {{ form_row(mon_formulaire_ajout_marque_page.url) }}
+        {{ form_row(mon_formulaire_ajout_marque_page.commentaire) }}
+        {{ form_row(mon_formulaire_ajout_marque_page.date_creation) }}
+    {{ form_end(mon_formulaire_ajout_marque_page) }}
+
+     <button><a href="{{ path('marquepage_index') }}">Retour à la liste des marque-pages</a></button>
+{% endblock %}
