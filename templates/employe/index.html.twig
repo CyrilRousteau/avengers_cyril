@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/livres.css') }}">
+{% endblock %}
+
+{% block title %}Liste des employés{% endblock %}
+
+{% block header %}
+    <h2>Liste des employés</h2>
+    <table class="tableau-livres">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Adresse</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employe in employes %}
+                <tr>
+                    <td>{{ employe.nom }}</td>
+                    <td>{{ employe.prenom }}</td>
+                    <td>
+                        {% if employe.adresse %}
+                            {{ employe.adresse.rue }}, 
+                            {{ employe.adresse.codePostal }},
+                            {{ employe.adresse.ville }},
+                            {{ employe.adresse.pays }}
+                        {% else %}
+                            Pas d'adresse enregistrée
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button><a href="{{ path('employe_ajout') }}">Ajouter un employé</a></button>
+{% endblock %}

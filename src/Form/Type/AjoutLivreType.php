@@ -8,6 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Auteur;
 use App\Entity\Livre;
 
 class AjoutLivreType extends AbstractType
@@ -19,6 +21,9 @@ class AjoutLivreType extends AbstractType
             ->add('titre', TextType::class)
             ->add('date_publication', DateTimeType::class)
             ->add('valider', SubmitType::class)
+            ->add('auteur', EntityType::class, [
+                'class' => Auteur::class
+            ])
         ;
     }
     // Ici, on défini de manière explicite le « data_class »

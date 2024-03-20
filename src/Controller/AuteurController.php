@@ -26,7 +26,6 @@ class AuteurController extends AbstractController
 
     #[Route('/auteur/modifier/{id}', name: 'modifier_auteur')]
     public function modifierAuteur(Request $request, $id, ManagerRegistry $doctrine): Response {
-        // Récupérez l'auteur à partir de la base de données
         $entityManager = $doctrine->getManager();
         $auteur = $entityManager->getRepository(Auteur::class)->find($id);
 
@@ -34,14 +33,11 @@ class AuteurController extends AbstractController
             throw $this->createNotFoundException('Aucun auteur trouvé pour l\'id ' . $id);
         }
 
-        // Création et traitement du formulaire de modification 
         $form = $this->createForm(ModificationAuteurType::class, $auteur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             $entityManager->flush();
-
-            // Redirige vers une route appropriée après la modification
             return $this->redirectToRoute('modification_auteur_success');
         }
 

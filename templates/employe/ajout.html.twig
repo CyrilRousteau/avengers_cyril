@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/form.css') }}">
+{% endblock %}
+    
+{% block title %}Ajout d'un Employé{% endblock %}
+{% block header %}
+    <h2>Formulaire d'ajout d'un Employé</h2>
+    {{ form_start(mon_formulaire_ajout_employe) }}
+        {{ form_row(mon_formulaire_ajout_employe.nom) }}
+        {{ form_row(mon_formulaire_ajout_employe.prenom) }}
+
+        <h3>Adresse</h3>
+        {{ form_row(mon_formulaire_ajout_employe.adresse.rue) }}
+        {{ form_row(mon_formulaire_ajout_employe.adresse.code_postal) }}
+        {{ form_row(mon_formulaire_ajout_employe.adresse.ville) }}
+        {{ form_row(mon_formulaire_ajout_employe.adresse.pays) }}
+
+    {{ form_end(mon_formulaire_ajout_employe) }}
+
+    <button><a href="{{ path('employe_index') }}">Retour à la liste des employés</a></button>
+{% endblock %}

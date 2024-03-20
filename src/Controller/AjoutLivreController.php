@@ -13,17 +13,11 @@ class AjoutLivreController extends AbstractController {
     #[Route('/livre/ajout', name:'livre_ajout')]
     public function ajoutLivre(Request $request, ManagerRegistry $doctrine)
     {
-        // Création d’un objet que l'on assignera au formulaire
         $livre = new Livre();
-        $livre->setTitre(""); // Pour pré-renseigner des valeurs
+        $livre->setTitre("");
         $form = $this->createForm(AjoutLivreType::class, $livre); 
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
-        // $form->getData() : pour récupérer les données
-        // Les données sont déjà stockées dans la variable d’origine
-        // $livre = $form->getData();
-        // ... Effectuer le/les traitements(s) à réaliser
-        // Par exemple :
         $entityManager = $doctrine->getManager();
         $entityManager->persist($livre);
         $entityManager->flush();

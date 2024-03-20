@@ -13,17 +13,11 @@ class AjoutAuteurController extends AbstractController {
     #[Route('/auteur/ajout', name:'auteur_ajout')]
     public function ajoutAuteur(Request $request, ManagerRegistry $doctrine)
     {
-        // Création d’un objet que l'on assignera au formulaire
         $auteur = new Auteur();
-        $auteur->setNom(""); // Pour pré-renseigner des valeurs
+        $auteur->setNom("");
         $form = $this->createForm(AjoutAuteurType::class, $auteur); 
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
-        // $form->getData() : pour récupérer les données
-        // Les données sont déjà stockées dans la variable d’origine
-        // $auteur = $form->getData();
-        // ... Effectuer le/les traitements(s) à réaliser
-        // Par exemple :
         $entityManager = $doctrine->getManager();
         $entityManager->persist($auteur);
         $entityManager->flush();

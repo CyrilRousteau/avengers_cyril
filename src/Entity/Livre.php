@@ -36,8 +36,10 @@ class Livre
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date_publication = null;
 
-    #[ORM\ManyToOne(inversedBy: 'livres')]
-    private ?Auteur $auteur = null;
+    #[ORM\ManyToOne(targetEntity:"App\Entity\Auteur", inversedBy: "livres")]
+    #[Assert\Type(type:"App\Entity\Auteur")]
+    #[Assert\Valid]
+    private $auteur;
 
     public function getId(): ?int
     {

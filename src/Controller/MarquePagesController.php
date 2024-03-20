@@ -36,25 +36,21 @@ class MarquePagesController extends AbstractController
 
     #[Route('/ajouter-mot-cle/{idMarquePage}/{motCleTexte}', name: "ajouter_mot_cle")]
     public function ajoutMotCleMarquePage(EntityManagerInterface $entityManager, int $idMarquePage, string $motCleTexte): Response {
-        // Récupérer le marque-page par son ID
+ 
         $marquePage = $entityManager->getRepository(MarquePage::class)->find($idMarquePage);
 
         if (!$marquePage) {
             return new Response("Marque page non trouvé.");
         }
 
-        // Vérifier si le mot-clé existe déjà
         $motCle = $entityManager->getRepository(MotsCles::class)->findOneBy(['motCle' => $motCleTexte]);
 
-        // Si le mot-clé n'existe pas, en créer un nouveau
         if (!$motCle) {
             $motCle = new MotsCles();
             $motCle->setMotCle($motCleTexte);
             $entityManager->persist($motCle);
-            // Pas besoin de flush ici, le flush à la fin suffira pour enregistrer les nouvelles entités
         }
 
-        // Ajouter le mot-clé au marque-page
         $marquePage->addMotsCle($motCle);
 
         $entityManager->persist($marquePage);
