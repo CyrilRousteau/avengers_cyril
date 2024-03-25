@@ -1,0 +1,18 @@
+{# templates/mots_cles/ajout.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/form.css') }}">
+{% endblock %}
+
+{% block title %}Ajouter un Mot-clé{% endblock %}
+
+{% block header %}
+    <h2>Ajouter un Mot-clé</h2>
+    {{ form_start(formMotsCles) }}
+        {{ form_row(formMotsCles.motCle) }}
+    {{ form_end(formMotsCles) }}
+
+    <button><a href="{{ path('marque_page_ajout') }}">Retour au formulaire de marque-page</a></button>
+{% endblock %}

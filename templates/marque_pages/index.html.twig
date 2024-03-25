@@ -1,9 +1,10 @@
-{% extends 'layout.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block title %}Marque pages{% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('assets/css/tableau.css') }}">
 {% endblock %}
+
+{% block title %}Marque pages{% endblock %}
 
 {% block header %}
     <div class="container mt-5">
@@ -16,6 +17,7 @@
                     <tr>
                         <th>Url</th>
                         <th>Commentaire</th>
+                        <th>Mots-clés</th> <!-- Nouvelle colonne pour les mots-clés -->
                     </tr>
                     </thead>
                     <tbody>
@@ -23,6 +25,13 @@
                         <tr>
                             <td><a href="{{ path('marquepage_details', {'id': mpr.id}) }}">{{ mpr.url }}</a></td>
                             <td>{{ mpr.commentaire }}</td>
+                            <td>
+                                {% for motCle in mpr.motsCles %} <!-- Boucle sur les mots-clés du marque-page -->
+                                    <span class="badge bg-secondary">{{ motCle.motCle }}</span> <!-- Affiche chaque mot-clé -->
+                                {% else %}
+                                    Aucun mot-clé
+                                {% endfor %}
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>

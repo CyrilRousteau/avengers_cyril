@@ -15,7 +15,13 @@ use App\Form\Type\ModificationLivreType;
 
 class LivreController extends AbstractController
 {
-    // Ajouter un livre + auteur associé (remis en service suite demande M.Cavaillé le 21/02/24 pour correction)
+
+    #[Route("/", name: "homepage")]
+    public function homepage(): Response
+    {
+        return $this->redirectToRoute('liste_livre');
+    }
+
     #[Route("/ajouter-livre", name:"ajouter_livre")]
 
     public function ajouterLivre(EntityManagerInterface $entityManager): Response
