@@ -23,7 +23,7 @@ class MarquePagesController extends AbstractController
         ]);
     }
 
-    #[Route('/details/{id}', name:'details')]
+    #[Route('/details/{id}', name:'marquepage_details')]
     public function detail(EntityManagerInterface $entityManager, int $id): Response {
         $marquePage = $entityManager->getRepository(MarquePage::class)->find($id);
         if (!$marquePage) {
